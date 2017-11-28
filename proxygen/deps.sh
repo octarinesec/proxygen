@@ -25,6 +25,7 @@ trap 'cd $start_dir' EXIT
 # Must execute from the directory containing this script
 cd "$(dirname "$0")"
 
+INSTALLATION_TARGET=`pwd`/proxygen-installation/usr/local
 # Some extra dependencies for Ubuntu 13.10 and 14.04
 sudo apt-get install -yq \
     git \
@@ -58,7 +59,7 @@ then
     svn checkout https://google-glog.googlecode.com/svn/trunk/ google-glog
     (
       cd google-glog
-      ./configure
+      ./configure --prefix $INSTALLATION_TARGET
       make
       sudo make install
     )
@@ -72,7 +73,7 @@ then
     svn checkout https://google-gflags.googlecode.com/svn/trunk/ google-gflags
     (
       cd google-gflags
-      ./configure
+      ./configure --prefix $INSTALLATION_TARGET
       make
       sudo make install
     )
@@ -104,7 +105,7 @@ git checkout master
 
 # Build folly
 autoreconf --install
-./configure
+./configure --prefix $INSTALLATION_TARGET
 make -j$JOBS
 sudo make install
 
@@ -136,7 +137,7 @@ cd ../..
 
 # Build proxygen
 autoreconf -ivf
-./configure
+./configure --prefix $INSTALLATION_TARGET
 make -j$JOBS
 
 # Run tests
