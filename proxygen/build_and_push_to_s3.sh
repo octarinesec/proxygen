@@ -1,7 +1,7 @@
 #!/bin/bash -e 
 
-#./deps.sh 
-#./reinstall.sh
+./deps.sh 
+./reinstall.sh
 
 TAG=`git describe`
 source /etc/lsb-release

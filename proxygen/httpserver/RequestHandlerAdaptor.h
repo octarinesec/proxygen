@@ -35,6 +35,7 @@ class RequestHandlerAdaptor
       public ResponseHandler {
  public:
   explicit RequestHandlerAdaptor(RequestHandler* requestHandler);
+  HTTPTransaction* getTransaction() { return txn_;}
 
  private:
   // HTTPTransactionHandler
